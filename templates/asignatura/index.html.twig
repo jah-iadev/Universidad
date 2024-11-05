@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Asignatura index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Listado de Asignaturas</h1>
+
+    <table class="table table-info">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Creditos</th>
+                <th>Aula</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for asignatura in asignaturas %}
+            <tr>
+                <td>{{ asignatura.id }}</td>
+                <td>{{ asignatura.nombre }}</td>
+                <td>{{ asignatura.creditos }}</td>
+                <td>{{ asignatura.aula.nombre }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_asignatura_show', {'id': asignatura.id}) }}">Mostrar</a>
+                    <a class="btn btn-info" href="{{ path('app_asignatura_edit', {'id': asignatura.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No hay registros</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('app_asignatura_new') }}">Crear nueva Asignatura</a>
+</div>
+{% endblock %}

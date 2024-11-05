@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de Matrículas{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Listado de Matrículas</h1>
+    <table class="table table-info">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Curso</th>
+                <th>Alumno</th>
+                <th>Asignatura</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for matricula in matriculas %}
+            <tr>
+                <td>{{ matricula.id }}</td>
+                <td>{{ matricula.curso }}</td>
+                <td>{{ matricula.alumno.nombre }}</td>
+                <td>{{ matricula.asignatura.nombre }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_matricula_show', {'id': matricula.id}) }}">show</a>
+                    <a class="btn btn-info" href="{{ path('app_matricula_edit', {'id': matricula.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Ninguna matricula encontrada</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('app_matricula_new') }}">Crear nuevo</a>
+</div>
+{% endblock %}

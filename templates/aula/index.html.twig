@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aula index{% endblock %}
+
+{% block body %}
+    <h1>Listado de Aulas</h1>
+
+    <table class="table table-info">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Ubicacion</th>
+                <th>Capacidad</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for aula in aulas %}
+            <tr>
+                <td>{{ aula.id }}</td>
+                <td>{{ aula.nombre }}</td>
+                <td>{{ aula.ubicacion }}</td>
+                <td>{{ aula.capacidad }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_aula_show', {'id': aula.id}) }}">show</a>
+                    <a class="btn btn-info" href="{{ path('app_aula_edit', {'id': aula.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hay Aulas</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-info" href="{{ path('app_aula_new') }}">Crear nueva Aula</a>
+{% endblock %}

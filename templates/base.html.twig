@@ -2,16 +2,49 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenidos{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+           <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+       {% endblock %}
+       {% block javascripts %}
+           <script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script>
+       {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-6">
+                        <h1>GESTIÓN INSTITUTO</h1>
+                    </div>
+                    <div class="col-md-6">
+                        {% if app.user %}
+                        <span>Bienvenido, {{ app.user.userIdentifier }}!</span>
+                        <a href="{{ path('app_logout') }}">Cerrar sesión</a>  {# Botón de logout #}
+                        {% else %}
+                            <a href="{{ path('app_login') }}">Iniciar sesión</a>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <nav class="col-md-2 bg-info sidebar">
+                        <ul class="nav flex-column">
+                            <h3>MENÚ</h3>
+                            <li class="nav-item"><a class="nav-link active fw-bold" href="/asignatura/">Asignaturas</a></li>
+                            <li class="nav-item"><a class="nav-link active fw-bold" href="/aula/">Aulas</a></li>
+                            <li class="nav-item"><a class="nav-link active fw-bold" href="/alumno/">Alumnos</a></li>
+                            <li class="nav-item"><a class="nav-link active fw-bold" href="/matricula/">Matriculas</a></li>
+                        </ul>
+                    </nav>
+                </nav>
+                <main class="content col-md-10">
+                    {% block body %}
+                    {% endblock %}
+                </main>
+               </div> 
+            </div>
+    </div>
     </body>
 </html>
